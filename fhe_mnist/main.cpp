@@ -118,45 +118,20 @@ std::vector<Ciphertext<DCRTPoly>> Lenet5Inference :: Convolve(
                 std::vector<double> temp = {0};
                 Plaintext ptxt = cc->MakeCKKSPackedPlaintext(temp); 
                 auto total_sum = cc->Encrypt(keys.publicKey, ptxt);
-                // Plaintext result0;
-                // cc->Decrypt(keys.secretKey, total_sum, &result0);
-                // result0->SetLength(batchSize);
-                // auto decryptedValues0 = result0->GetCKKSPackedValue();
-                // std::cout << decryptedValues0[0] << std::endl;
                 for (int dy = 0; dy < filter_height; ++dy) {
                     for (int dx = 0; dx < filter_width; ++dx) {
                         for (int d = 0; d < input_depth; ++d) {
                             int sum_y = y * stride + dy - pad_h;
                             int sum_x = x * stride + dx - pad_w;
                             if (0 <= sum_y && sum_y < input_height && 0 <= sum_x && sum_x < input_width) {
-                                // std::cout << "Here in Convolve" << std::endl;
                                 auto filter_val = filters[Lenet5Inference::find_flattened_index(dy, dx, d, f, filters_SHAPE, 4)];
-                                // std::cout << "Here in Convolve" << std::endl;
                                 auto feature_map_val = feature_maps[Lenet5Inference::find_flattened_index(sum_y, sum_x, d, -1, feature_maps_SHAPE, 3)];
-                                // std::cout << "Here in Convolve" << std::endl;
                                 total_sum = cc->EvalAdd(total_sum, cc->EvalMult(filter_val, feature_map_val));
-                                // Plaintext result;
-                                // cc->Decrypt(keys.secretKey, total_sum, &result);
-                                // result->SetLength(batchSize);
-                                // auto decryptedValues = result->GetCKKSPackedValue();
-                                // Plaintext result1;
-                                // cc->Decrypt(keys.secretKey, filter_val, &result1);
-                                // result1->SetLength(batchSize);
-                                // auto decryptedValues1 = result1->GetCKKSPackedValue();
-                                // Plaintext result2;
-                                // cc->Decrypt(keys.secretKey, feature_map_val, &result2);
-                                // result2->SetLength(batchSize);
-                                // auto decryptedValues2 = result2->GetCKKSPackedValue();
-                                // std::cout << decryptedValues[0] << " " << decryptedValues1[0] << " " << decryptedValues2[0] << std::endl;
-                                // exit(0);
-                                // std::cout << result->GetLogPrecision() << std::endl;
                             }
                         }
                     }
                 }
                 output[y][x][f] = cc->EvalAdd(total_sum, biases[f]);
-		/// size_t e = sizeof(output[y][x][f]);
-		// std::cout << "Bytes of One element is: " << e << std::endl;
             }
         }
     }
