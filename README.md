@@ -44,4 +44,4 @@ There are 4 main folders in this repository:
 
 - Ensure OpenFHE is set up for `fhe_mnist`. [Installation instructions](https://openfhe-development.readthedocs.io/en/latest/sphinx_rsts/intro/installation/installation.html).
 - For changes in `fhe_mnist`, follow the build instructions.
-- All these files can also be found in the caiwenML server it he location: `/data/hkp18001/sdp27/final`
+- All these files can also be found in the caiwenML server in the location: `/data/hkp18001/sdp27/final`
