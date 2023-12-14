@@ -1,0 +1,3 @@
+/data/hkp18001/sdp27/fhe_mnist/build/CMakeFiles/rebuild_cache.dir
+/data/hkp18001/sdp27/fhe_mnist/build/CMakeFiles/main.dir
+/data/hkp18001/sdp27/fhe_mnist/build/CMakeFiles/edit_cache.dir
